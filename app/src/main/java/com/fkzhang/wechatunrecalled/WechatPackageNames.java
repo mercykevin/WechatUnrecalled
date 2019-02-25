@@ -65,6 +65,19 @@ public class WechatPackageNames {
     public String snsLuckyMoneyClass3;
     public String snsLuckyMoneyClass4;
     public String SQLiteDatabaseClass;
+    public String logClass;
+    public String logMethodD;
+    public String logMethodI;
+    public String logMethodE;
+    public String logMethodF;
+    public String logMethodJ;
+    public String logMethodV;
+    public String logMethodW;
+    public String logMethodH;
+    public String sendMessageClass;
+    public String sendMessageMethod;
+    public String dispatchMessageClass;
+
 
     public WechatPackageNames(String packageName, String versionName) {
         this.packageName = packageName;
@@ -420,6 +433,18 @@ public class WechatPackageNames {
     private void set6313() {
         set6311();
         snsLuckyMoneyRevealBigpicture = "bpg";
+        this.logClass = this.packageName + ".sdk.platformtools.u";
+        this.logMethodD = "d";
+        this.logMethodE = "e";
+        this.logMethodF = "f";
+        this.logMethodI = "i";
+        this.logMethodJ = "j";
+        this.logMethodV = "v";
+        this.logMethodW = "w";
+        this.logMethodH = "h";
+        this.sendMessageClass = this.packageName + ".modelvoice.q";
+        this.sendMessageMethod = "i";
+        this.dispatchMessageClass = this.packageName + ".sdk.platformtools.ac";
     }
 
     private void initNames() {

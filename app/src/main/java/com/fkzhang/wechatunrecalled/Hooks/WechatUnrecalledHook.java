@@ -13,17 +13,21 @@ import android.net.Uri;
 import android.os.Message;
 import android.support.v4.util.SparseArrayCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.fkzhang.wechatunrecalled.Util.ImageUtil;
 import com.fkzhang.wechatunrecalled.Util.NotificationHelper;
 import com.fkzhang.wechatunrecalled.Util.SettingsHelper;
 import com.fkzhang.wechatunrecalled.Util.WechatMainDBHelper;
 import com.fkzhang.wechatunrecalled.Util.WechatSnsDBHelper;
 import com.fkzhang.wechatunrecalled.WechatPackageNames;
+
+import org.json.JSONObject;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -97,6 +101,16 @@ public class WechatUnrecalledHook {
 
     public void hook(final ClassLoader loader) {
         try {
+            hookLog(loader);
+        } catch (Throwable e) {
+            XposedBridge.log(e);
+        }
+//        try {
+//            hookSendMsg(loader);
+//        } catch (Throwable e) {
+//            XposedBridge.log(e);
+//        }
+        try {
             hookRecall(loader);
         } catch (Throwable e) {
             XposedBridge.log(e);
@@ -136,7 +150,6 @@ public class WechatUnrecalledHook {
         } catch (Throwable t) {
             XposedBridge.log(t);
         }
-
     }
 
     protected void hookRecall(final ClassLoader loader) {
@@ -292,6 +305,182 @@ public class WechatUnrecalledHook {
         } catch (Throwable t) {
             log(t);
         }
+    }
+
+    protected void hookLog(final ClassLoader loader) {
+        //hook log d
+        XposedHelpers.findAndHookMethod(w.logClass, loader,
+                w.logMethodD, String.class, String.class,
+                new XC_MethodHook() {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        outlog2LogCat(param);
+                    }
+                });
+        XposedHelpers.findAndHookMethod(w.logClass, loader,
+                w.logMethodD, String.class, String.class, Object[].class,
+                new XC_MethodHook() {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        outlog2LogCat(param);
+                    }
+                });
+        //log e
+        XposedHelpers.findAndHookMethod(w.logClass, loader,
+                w.logMethodE, String.class, String.class,
+                new XC_MethodHook() {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        outlog2LogCat(param);
+                    }
+                });
+        XposedHelpers.findAndHookMethod(w.logClass, loader,
+                w.logMethodE, String.class, String.class, Object[].class,
+                new XC_MethodHook() {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        outlog2LogCat(param);
+                    }
+                });
+        //log f
+        XposedHelpers.findAndHookMethod(w.logClass, loader,
+                w.logMethodF, String.class, String.class,
+                new XC_MethodHook() {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        outlog2LogCat(param);
+                    }
+                });
+        XposedHelpers.findAndHookMethod(w.logClass, loader,
+                w.logMethodF, String.class, String.class, Object[].class,
+                new XC_MethodHook() {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        outlog2LogCat(param);
+                    }
+                });
+        //log h
+        XposedHelpers.findAndHookMethod(w.logClass, loader,
+                w.logMethodH, String.class, String.class, Object[].class,
+                new XC_MethodHook() {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        outlog2LogCat(param);
+                    }
+                });
+        //log i
+        XposedHelpers.findAndHookMethod(w.logClass, loader,
+                w.logMethodI, String.class, String.class,
+                new XC_MethodHook() {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        outlog2LogCat(param);
+                    }
+                });
+        XposedHelpers.findAndHookMethod(w.logClass, loader,
+                w.logMethodI, String.class, String.class, Object[].class,
+                new XC_MethodHook() {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        outlog2LogCat(param);
+                    }
+                });
+        //log j
+        XposedHelpers.findAndHookMethod(w.logClass, loader,
+                w.logMethodJ, String.class, String.class, Object[].class,
+                new XC_MethodHook() {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        outlog2LogCat(param);
+                    }
+                });
+        //log v
+        XposedHelpers.findAndHookMethod(w.logClass, loader,
+                w.logMethodV, String.class, String.class,
+                new XC_MethodHook() {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        outlog2LogCat(param);
+                    }
+                });
+        XposedHelpers.findAndHookMethod(w.logClass, loader,
+                w.logMethodV, String.class, String.class, Object[].class,
+                new XC_MethodHook() {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        outlog2LogCat(param);
+                    }
+                });
+        //log w
+        XposedHelpers.findAndHookMethod(w.logClass, loader,
+                w.logMethodW, String.class, String.class,
+                new XC_MethodHook() {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        outlog2LogCat(param);
+                    }
+                });
+        XposedHelpers.findAndHookMethod(w.logClass, loader,
+                w.logMethodW, String.class, String.class, Object[].class,
+                new XC_MethodHook() {
+                    @SuppressWarnings("unchecked")
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        outlog2LogCat(param);
+                    }
+                });
+        XposedBridge.log("handle hook wechat log");
+    }
+
+    private void outlog2LogCat(XC_MethodHook.MethodHookParam param) {
+        if (param.args.length < 3) {
+            Log.i("abc_wechat", String.format("%s %s", param.args[0], param.args[1]));
+        } else {
+            Object[] three_param = new Object[]{};
+            if (param.args[2] != null) {
+                three_param = (Object[]) param.args[2];
+            }
+            try {
+                Log.i("abc_wechat", String.format("%s %s", param.args[0],
+                        String.format((String) param.args[1], three_param)));
+            } catch (Throwable e) {
+                Log.e("abc_wechat", "before hooked invoke args:" + JSON.toJSONString(param.args));
+            }
+        }
+    }
+
+    protected void hookSendMsg(final ClassLoader loader) {
+        findAndHookMethod(w.sendMessageClass, loader,
+                w.sendMessageMethod, String.class, int.class, int.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        Log.i("abc_wechat", String.format("the send message parames %s %d %d",
+                                param.args[0], param.args[1], param.args[2]));
+                    }
+                });
+        findAndHookMethod(w.dispatchMessageClass, loader,
+                "dispatchMessage", Message.class, new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        Message message = (Message) param.args[0];
+                        String messageJson = JSON.toJSONString(message);
+                        Log.e("abc_wechat", String.format("dispatchMessage message parames %s %s",
+                                messageJson, message.getClass().getName()));
+                    }
+                });
     }
 
     protected void hookLauncherUI(final ClassLoader loader) {
